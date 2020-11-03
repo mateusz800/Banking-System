@@ -15,3 +15,12 @@ services:
       context: .
       dockerfile: SupportAPI/Dockerfile
 
+  db:
+    image: postgres:13.0
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bVhDX2XcgwEatQ6djUNKLm786wguSjpm
+      POSTGRES_DB: banking
+    ports:
+      - 5435:5432
