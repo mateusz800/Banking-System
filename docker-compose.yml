@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  banking:
+    image: ${DOCKER_REGISTRY-}banking
+    build:
+      context: .
+      dockerfile: Banking\Dockerfile
+
+  supportapi:
+    image: ${DOCKER_REGISTRY-}supportapi
+    build:
+      context: .
+      dockerfile: SupportAPI\Dockerfile

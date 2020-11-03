@@ -1,0 +1,14 @@
+C:\Users\krzys\source\repos\Banking\bin\Debug\appsettings.Development.json
+C:\Users\krzys\source\repos\Banking\bin\Debug\appsettings.json
+C:\Users\krzys\source\repos\Banking\bin\Debug\Properties\launchSettings.json
+C:\Users\krzys\source\repos\Banking\bin\Debug\SupportAPI.exe
+C:\Users\krzys\source\repos\Banking\bin\Debug\SupportAPI.dll
+C:\Users\krzys\source\repos\Banking\bin\Debug\SupportAPI.pdb
+C:\Users\krzys\source\repos\Banking\obj\Debug\docker-compose.dcprojAssemblyReference.cache
+C:\Users\krzys\source\repos\Banking\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+C:\Users\krzys\source\repos\Banking\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\krzys\source\repos\banking\bin\Debug\Banking.Views.dll
+C:\Users\krzys\source\repos\banking\bin\Debug\Banking.Views.pdb
+C:\Users\krzys\source\repos\banking\bin\Debug\Banking.exe
+C:\Users\krzys\source\repos\banking\bin\Debug\Banking.dll
+C:\Users\krzys\source\repos\banking\bin\Debug\Banking.pdb
