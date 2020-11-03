@@ -5,10 +5,13 @@ services:
     image: ${DOCKER_REGISTRY-}banking
     build:
       context: .
-      dockerfile: Banking\Dockerfile
+      dockerfile: Banking/Dockerfile
+    depends_on:
+      - supportapi
 
   supportapi:
     image: ${DOCKER_REGISTRY-}supportapi
     build:
       context: .
-      dockerfile: SupportAPI\Dockerfile
+      dockerfile: SupportAPI/Dockerfile
+

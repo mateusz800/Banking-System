@@ -24,7 +24,7 @@ namespace Banking.Pages
             using (var client = new System.Net.Http.HttpClient())
             {
                 var request = new System.Net.Http.HttpRequestMessage();
-                request.RequestUri = new Uri("http://localhost/WeatherForecast"); // ASP.NET 3 (VS 2019 only)
+                request.RequestUri = new Uri("http://supportapi/WeatherForecast"); // ASP.NET 3 (VS 2019 only)
                 var response = await client.SendAsync(request);
                 ViewData["Message"] += " and " + await response.Content.ReadAsStringAsync();
             }
