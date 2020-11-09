@@ -3,15 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AuthService.Models
 {
-    public class LoginModel
+    public class RegistrationModel
     {
         [Required]
-        public string Login { get; private set; }
-        [Required]
-        public string Password { get; private set; }
+        public string Login { get; set; }
         [Required]
         public string FirstName { get; private set; }
         [Required]
         public string LastName { get; private set; }
+        [Required]
+        public string Password { get; private set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AuthService.Models
 {
-    public class RegistrationModel
+    public class LoginModel
     {
         [Required]
         public string Login { get; set; }
