@@ -10,23 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/auth/{everything}",
-      "UpstreamHttpMethod": [  "POST", "GET" ],
-      "SwaggerKey": "auth"
-    },
-  ],
-  "SwaggerEndPoints": [
-    {
-      "Key": "auth",
-      "Config": [
-        {
-          "Name": "Auth API",
-          "Version": "v1",
-          "Url": "https://localhost:5002/swagger/v1/swagger.json"
-        }
-      ]
+      "UpstreamHttpMethod": [  "POST", "GET" ]
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5002"
-  }
+  ]
 }

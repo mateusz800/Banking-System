@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AuthService.Controllers;
 using AuthService.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,11 +34,17 @@ namespace AuthService
             services.AddControllers();
 
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(provider => provider.GetService<UserManager<Entities.Account>>());
 
             services.AddIdentity<Entities.Account, IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
                  .AddDefaultTokenProviders();
-            
+
+            services.AddTransient<UserManager<Entities.Account>>();
+            services.AddTransient<DataContext>();
+
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,13 +54,13 @@ namespace AuthService
             {
                 app.UseDeveloperExceptionPage();
             }
+   
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

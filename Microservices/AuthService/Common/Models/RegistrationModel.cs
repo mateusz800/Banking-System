@@ -8,10 +8,10 @@ namespace AuthService.Models
         [Required]
         public string Login { get; set; }
         [Required]
-        public string FirstName { get; private set; }
+        public string FirstName { get; set; }
         [Required]
-        public string LastName { get; private set; }
+        public string LastName { get; set; }
         [Required]
-        public string Password { get; private set; }
+        public string Password { get; set; }
     }
 }

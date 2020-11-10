@@ -1,91 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
+using AuthService.Commands.CreateAccount;
+using AuthService.Commands.Login;
+using AuthService.Exceptions;
 using AuthService.Models;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace AuthService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController
+    public class AuthController : Controller
     {
-        private readonly UserManager<Entities.Account> userManager;
+        private UserManager<Entities.Account> _userManager;
+        private IMediator _mediator;
 
-        public AuthController(UserManager<Entities.Account> userManager)
+        public AuthController(UserManager<Entities.Account> userManager, IMediator mediator)
         {
-            this.userManager = userManager;
+            _userManager = userManager;
+            _mediator = mediator;
+
         }
 
-        [HttpPost]
-        [Route("login")]
+        [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
         {
-            var user = await userManager.FindByNameAsync(model.Login);
-            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+            try
             {
-                var userRoles = await userManager.GetRolesAsync(user);
-
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
-
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-                // TODO: security Key to configuration file
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ByYM000OLlMQG6VVVp1OH7Xzyr7gHuw1qvUC5dcGt3SNM"));
-
-                var token = new JwtSecurityToken(
-                    expires: DateTime.Now.AddHours(3),
-                    claims: authClaims,
-                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                    );
-
-                return new OkObjectResult(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                var token = await _mediator.Send(new LoginCommand(_userManager, model));
+                return Ok(token);
             }
-            return new UnauthorizedResult();
+            catch (BadCredentialsException e)
+            {
+                return Unauthorized(e.Message);
+            }
         }
 
-        [HttpPost]
+
+        [HttpPost("register")]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)
         {
-
-            var userExists = await userManager.FindByNameAsync(model.Login);
-            if (userExists != null)
+            try
             {
-                // user already exists
-                return new BadRequestResult();
+                var login = await _mediator.Send(new CreateAccountCommand(_userManager, model));
+                return Ok(login);
             }
-
-            Entities.Account user = new Entities.Account()
+            catch (Exception e)
             {
-                UserName = model.Login,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
-            var result = await userManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded)
-            {
-                // something went wrong
-                return new StatusCodeResult(500);
-
+                return BadRequest(e.Message);
             }
-            return new OkResult();
         }
     }
 }

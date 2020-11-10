@@ -55,11 +55,7 @@ namespace Gateway
             await app.UseOcelot();
 
          
-            // doesn;t work
-            app.UseSwaggerForOcelotUI(opt =>
-            {
-                opt.PathToSwaggerGenerator = "/swagger/docs";
-            });
+         
 
         }
     }
