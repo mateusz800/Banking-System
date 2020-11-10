@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthTest", "Microservices\AuthTest\AuthTest.csproj", "{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,8 +53,21 @@ Global
 		{71F1B5B9-9A68-4D5C-BDD4-8032C266E4A8}.Release|x64.Build.0 = Release|Any CPU
 		{71F1B5B9-9A68-4D5C-BDD4-8032C266E4A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{71F1B5B9-9A68-4D5C-BDD4-8032C266E4A8}.Release|x86.Build.0 = Release|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Debug|x64.Build.0 = Debug|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Debug|x86.Build.0 = Debug|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Release|x64.ActiveCfg = Release|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Release|x64.Build.0 = Release|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Release|x86.ActiveCfg = Release|Any CPU
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{71F1B5B9-9A68-4D5C-BDD4-8032C266E4A8} = {CD956AC0-DCD2-42AC-B608-874033E618E7}
+		{F815FDDF-6D87-4A5B-8CE4-1B0C2F6D2357} = {CD956AC0-DCD2-42AC-B608-874033E618E7}
 	EndGlobalSection
 EndGlobal
