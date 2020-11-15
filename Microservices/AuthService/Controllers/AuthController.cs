@@ -40,7 +40,6 @@ namespace AuthService.Controllers
 
 
         [HttpPost("register")]
-        [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)
         {
             try

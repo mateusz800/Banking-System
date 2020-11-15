@@ -45,6 +45,8 @@ namespace AuthService
 
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +59,13 @@ namespace AuthService
    
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
+            });
 
             app.UseRouting();
 

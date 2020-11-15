@@ -10,3 +10,39 @@ services:
       POSTGRES_DB: banking
     ports:
       - 5436:5432
+  
+  api_gateway:
+    container_name: banking_api_gateway
+    build:
+      context: ./ApiGateway
+      dockerfile: dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://+:5002;http://+:5001
+    restart: always
+    ports:
+      - 5002:5002
+
+  auth_service:
+    container_name: banking_auth_api
+    build:
+      context: ./Microservices/AuthService
+      dockerfile: dockerfile
+    environment:
+       - ASPNETCORE_URLS=https://+:5005;http://+:5006
+    restart: always
+    depends_on:
+      - "db"
+    ports:
+      - 5005:5005
+  
+  bank_account_service:
+    container_name: banking_bank_account
+    build:
+      context: ./Microservices/AuthService
+      dockerfile: dockerfile
+    environment:
+       - ASPNETCORE_URLS=https://+:5007;http://+:5008
+    restart: always
+    ports:
+      - 5007:5007
+    
