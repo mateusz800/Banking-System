@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using BankAccountService.Data;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AuthTest
+namespace BankAccountService
 {
     public class Startup
     {
@@ -31,6 +33,7 @@ namespace AuthTest
             services.AddControllers();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSwaggerGen();
         }

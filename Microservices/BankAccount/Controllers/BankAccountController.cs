@@ -1,27 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using BankAccountService.CommandsAndQueries.CreateBankAccount;
+using BankAccountService.CommandsAndQueries.GetAccountBalance;
+using BankAccountService.Common.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace AuthTest.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BankAccountController : Controller {
 
-        public BankAccountController()
-        {
+        private IMediator _mediator;
 
+        public BankAccountController(IMediator mediator)
+        {
+            _mediator = mediator;
         }
 
-        [HttpGet]
-        public IActionResult doSomething([FromHeader] Guid AccountId)
+        [HttpPost]
+        public IActionResult createBankAccount([FromHeader] Guid AccountId)
         {
-            
-            return Ok(AccountId);
+            try
+            {
+                _mediator.Send(new CreateBankAccountCommand(AccountId));
+                return Ok("Bank account is created");
+            } catch (UserAlreadyHaveBankAccountException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("balance")]
+        public async Task<IActionResult> getAccountBalanceAsync([FromHeader] Guid AccountId)
+        {
+            try
+            {
+                var response = await _mediator.Send(new GetAccountBalanceQuery(AccountId));
+                return Ok(response);
+            } catch(BankAccountNotFoundException e)
+            {
+                return BadRequest(e.Message);
+            }
+          
         }
 
     }

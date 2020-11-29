@@ -55,6 +55,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: bVhDX2XcgwEatQ6djUNKLm786wguSjpm
-      POSTGRES_DB: banking_auth
+      POSTGRES_DB: banking_account
     ports:
       - 5437:5432

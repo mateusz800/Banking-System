@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/BankAccount",
+      "DownstreamPathTemplate": "/api/BankAccount/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -21,8 +21,8 @@
           "Port": 5007
         }
       ],
-      "UpstreamPathTemplate": "/test",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/api/bank-account/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
