@@ -8,6 +8,7 @@ using AuthService.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,6 @@ namespace AuthService
             services.AddTransient<UserManager<Entities.Account>>();
             services.AddTransient<DataContext>();
 
-
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddSwaggerGen();
@@ -57,6 +57,9 @@ namespace AuthService
                 app.UseDeveloperExceptionPage();
             }
    
+            app.UseHttpsRedirection();
+
+            app.UseSwagger();
 
             app.UseHttpsRedirection();
 
