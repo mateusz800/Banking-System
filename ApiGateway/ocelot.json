@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/weatherforecast",
+      "DownstreamPathTemplate": "/BankAccount",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -26,6 +26,9 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "AccountId":  "Claims[UserId] > value"
       }
     }
   ]

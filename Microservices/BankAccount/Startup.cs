@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +30,9 @@ namespace AuthTest
         {
             services.AddControllers();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +44,16 @@ namespace AuthTest
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
+            });
+
 
             app.UseRouting();
 

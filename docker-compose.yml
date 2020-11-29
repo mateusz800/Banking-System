@@ -1,48 +1,60 @@
 ﻿version: "3.8"
 
 services:
-  db:
+  #api_gateway:
+  #  container_name: banking_api_gateway
+  #  build:
+  #    context: ./ApiGateway
+  #    dockerfile: dockerfile
+  #  environment:
+  #    - ASPNETCORE_URLS=https://+:5002;http://+:5001
+  #  restart: always
+  #  ports:
+  #    - 5002:5002
+
+  #auth_service:
+  #  container_name: banking_auth_api
+  #  build:
+  #    context: ./Microservices/AuthService
+  #    dockerfile: dockerfile
+  #  environment:
+  #     - ASPNETCORE_URLS=https://+:5005;http://+:5006
+  #  restart: always
+  #  depends_on:
+  #    - "db"
+  #  ports:
+  #    - 5005:5005
+
+  auth_db:
     image: postgres:13.0
     restart: always
+    container_name: banking_auth_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: bVhDX2XcgwEatQ6djUNKLm786wguSjpm
-      POSTGRES_DB: banking
+      POSTGRES_DB: banking_auth
     ports:
       - 5436:5432
-  
-  api_gateway:
-    container_name: banking_api_gateway
-    build:
-      context: ./ApiGateway
-      dockerfile: dockerfile
-    environment:
-      - ASPNETCORE_URLS=https://+:5002;http://+:5001
-    restart: always
-    ports:
-      - 5002:5002
 
-  auth_service:
-    container_name: banking_auth_api
-    build:
-      context: ./Microservices/AuthService
-      dockerfile: dockerfile
-    environment:
-       - ASPNETCORE_URLS=https://+:5005;http://+:5006
-    restart: always
-    depends_on:
-      - "db"
-    ports:
-      - 5005:5005
   
-  bank_account_service:
-    container_name: banking_bank_account
-    build:
-      context: ./Microservices/AuthService
-      dockerfile: dockerfile
-    environment:
-       - ASPNETCORE_URLS=https://+:5007;http://+:5008
+  #bank_account_service:
+  #  container_name: banking_bank_account
+  #  build:
+  #    context: ./Microservices/AuthService
+  #    dockerfile: dockerfile
+  #  environment:
+  #     - ASPNETCORE_URLS=https://+:5007;http://+:5008
+  #  restart: always
+  #  ports:
+  #    - 5007:5007
+
+  bank_account_db:
+    image: postgres:13.0
     restart: always
+    container_name: banking_account_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bVhDX2XcgwEatQ6djUNKLm786wguSjpm
+      POSTGRES_DB: banking_auth
     ports:
-      - 5007:5007
-    
+      - 5437:5432

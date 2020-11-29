@@ -35,13 +35,14 @@ namespace Gateway
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         IssuerSigningKey = signingKey,
-                        ValidateIssuer = false, //true
-                        ValidateAudience = false, //true
-                        ValidateLifetime=false,//true
-                        ValidateActor = false//true
+                        ValidateIssuer = false, 
+                        ValidateAudience = false, 
+                        ValidateLifetime=false,
+                        ValidateActor = false
                         
                     };
                 });
