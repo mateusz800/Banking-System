@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace BankAccountService.Entities
+namespace BankAccountService.Data.Entities
 {
     public class BankAccount
     {

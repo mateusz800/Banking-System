@@ -6,7 +6,7 @@ using BankAccountService.Common.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthTest.Controllers
+namespace BankAccountService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

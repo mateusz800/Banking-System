@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BankAccountService.Common.Exceptions;
 using BankAccountService.Common.Models;
 using BankAccountService.Data;
-using BankAccountService.Entities;
+using BankAccountService.Data.Entities;
 using MediatR;
 
 namespace BankAccountService.CommandsAndQueries.CreateBankAccount
