@@ -54,7 +54,7 @@ namespace BankAccountService
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankAccount API V1");
             });
 
 
