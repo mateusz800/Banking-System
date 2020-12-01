@@ -19,7 +19,7 @@ namespace BankAccountService.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public IActionResult createBankAccount([FromHeader] Guid AccountId)
         {
             try

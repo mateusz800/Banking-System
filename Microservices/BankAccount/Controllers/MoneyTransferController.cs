@@ -22,7 +22,7 @@ namespace BankAccountService.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> makeTransfer([FromHeader] Guid AccountId, [FromBody] MoneyTransferModel transfer)
         {
             try

@@ -30,7 +30,27 @@
         "AllowedScopes": []
       },
       "AddHeadersToRequest": {
-        "AccountId":  "Claims[UserId] > value"
+        "AccountId": "Claims[UserId] > value"
+      }
+    },
+    {
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DownstreamPathTemplate": "/api/MoneyTransfer/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bankaccount",
+          "Port": 5017
+        }
+      ],
+      "UpstreamPathTemplate": "/api/money-transfer/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "AccountId": "Claims[UserId] > value"
       }
     }
   ],
