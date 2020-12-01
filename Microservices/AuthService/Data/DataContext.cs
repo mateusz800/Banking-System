@@ -10,9 +10,5 @@ namespace AuthService.Data
         public DbSet<Entities.Account> Accounts { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) :base(options) { }
-
-
-
-        
     }
 }

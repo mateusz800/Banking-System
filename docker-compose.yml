@@ -1,30 +1,6 @@
-﻿version: "3.8"
+version: '3.4'
 
 services:
-  #api_gateway:
-  #  container_name: banking_api_gateway
-  #  build:
-  #    context: ./ApiGateway
-  #    dockerfile: dockerfile
-  #  environment:
-  #    - ASPNETCORE_URLS=https://+:5002;http://+:5001
-  #  restart: always
-  #  ports:
-  #    - 5002:5002
-
-  #auth_service:
-  #  container_name: banking_auth_api
-  #  build:
-  #    context: ./Microservices/AuthService
-  #    dockerfile: dockerfile
-  #  environment:
-  #     - ASPNETCORE_URLS=https://+:5005;http://+:5006
-  #  restart: always
-  #  depends_on:
-  #    - "db"
-  #  ports:
-  #    - 5005:5005
-
   auth_db:
     image: postgres:13.0
     restart: always
@@ -36,18 +12,6 @@ services:
     ports:
       - 5436:5432
 
-  
-  #bank_account_service:
-  #  container_name: banking_bank_account
-  #  build:
-  #    context: ./Microservices/AuthService
-  #    dockerfile: dockerfile
-  #  environment:
-  #     - ASPNETCORE_URLS=https://+:5007;http://+:5008
-  #  restart: always
-  #  ports:
-  #    - 5007:5007
-
   bank_account_db:
     image: postgres:13.0
     restart: always
@@ -58,3 +22,39 @@ services:
       POSTGRES_DB: banking_account
     ports:
       - 5437:5432
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5012;http://+:5011
+    restart: always
+    ports:
+      - "5012:5012"
+
+  authservice:
+    image: ${DOCKER_REGISTRY-}authservice
+    build:
+      context: ./Microservices/AuthService
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5015;http://+:5016
+    restart: always
+    depends_on:
+      - "auth_db"
+
+  bankaccount:
+    image: ${DOCKER_REGISTRY-}bankaccount
+    build:
+      context: ./Microservices/BankAccount
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5017;http://+:5018
+    restart: always
+    depends_on:
+      - "bank_account_db"
