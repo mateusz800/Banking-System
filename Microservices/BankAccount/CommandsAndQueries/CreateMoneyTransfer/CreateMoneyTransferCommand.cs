@@ -4,8 +4,6 @@ using BankAccountService.Data;
 using BankAccountService.Data.Entities;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,19 +32,25 @@ namespace BankAccountService.CommandsAndQueries.CreateTransfer
 
             public async Task<ResponseModel> Handle(CreateMoneyTransferCommand request, CancellationToken cancellationToken)
             {
+                var moneyTransfer = request.Transfer;
+                if (request.AccountId == moneyTransfer.TargetAccountId)
+                {
+                    throw new TransferToSameAccountException();
+                }
+
                 var accountFrom = dataContext.BankAccounts.Find(request.AccountId);
-                var accountTo = dataContext.BankAccounts.Find(request.Transfer.TargetAccountId);
+                var accountTo = dataContext.BankAccounts.Find(moneyTransfer.TargetAccountId);
                 if (accountFrom == null || accountTo == null)
                 {
                     throw new BankAccountNotFoundException();
                 }
-                if(request.Transfer.Amount > accountFrom.Balance)
+                if(moneyTransfer.Amount > accountFrom.Balance)
                 {
                     throw new BalanceTooLowException();
                 }
-                accountFrom.Balance -= request.Transfer.Amount;
-                accountTo.Balance += request.Transfer.Amount;
-                var newMoneyTransfer = new MoneyTransfer(accountFrom.Id, accountTo.Id, request.Transfer.Amount);
+                accountFrom.Balance -= moneyTransfer.Amount;
+                accountTo.Balance += moneyTransfer.Amount;
+                var newMoneyTransfer = new MoneyTransfer(moneyTransfer.Title, accountFrom.Id, accountTo.Id, moneyTransfer.Amount, DateTime.Now);
                 dataContext.MoneyTransfers.Add(newMoneyTransfer);
                 dataContext.BankAccounts.Update(accountFrom);
                 dataContext.BankAccounts.Update(accountTo);

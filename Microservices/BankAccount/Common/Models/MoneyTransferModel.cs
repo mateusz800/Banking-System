@@ -9,5 +9,7 @@ namespace BankAccountService.Common.Models
         public Guid TargetAccountId { get; set; }
         [Required]
         public float Amount { get; set; }
+        [Required]
+        public string Title { get; set; }
     }
 }

@@ -44,7 +44,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/money-transfer/{everything}",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": [ "GET", "POST" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
