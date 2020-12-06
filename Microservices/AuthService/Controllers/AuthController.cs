@@ -1,12 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using AuthService.Commands.CreateAccount;
+﻿using AuthService.Commands.CreateAccount;
 using AuthService.Commands.Login;
+using AuthService.Common.Filters;
 using AuthService.Exceptions;
 using AuthService.Models;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace AuthService.Controllers
 {
@@ -40,6 +41,7 @@ namespace AuthService.Controllers
 
 
         [HttpPost("register")]
+        [ServiceFilter(typeof(NameFilter))]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)
         {
             try
