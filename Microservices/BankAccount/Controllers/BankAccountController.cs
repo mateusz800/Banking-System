@@ -24,8 +24,8 @@ namespace BankAccountService.Controllers
         {
             try
             {
-                _mediator.Send(new CreateBankAccountCommand(AccountId));
-                return Ok("Bank account is created");
+                var response = _mediator.Send(new CreateBankAccountCommand(AccountId));
+                return Ok(response.Result);
             } catch (UserAlreadyHaveBankAccountException e)
             {
                 return BadRequest(e.Message);

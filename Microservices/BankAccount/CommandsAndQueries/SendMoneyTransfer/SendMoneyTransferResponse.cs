@@ -4,9 +4,9 @@ using BankAccountService.Common.Models;
 
 namespace BankAccountService.CommandsAndQueries.CreateTransfer
 {
-    public class CreateMoneyTransferResponse : ResponseModel
+    public class SendMoneyTransferResponse : ResponseModel
     {
-        public CreateMoneyTransferResponse(HttpStatusCode status) : base(status)
+        public SendMoneyTransferResponse(HttpStatusCode status) : base(status)
         {
         }
     }

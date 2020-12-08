@@ -1,12 +1,16 @@
 ﻿using System;
-using Microsoft.AspNetCore.Identity;
 
-namespace BankAccountService.Data.Entities
+namespace BankAccountService.MoneyTransfer.Data.Entities
 {
     public class BankAccount
     {
         public Guid Id { get; set; }
         public float Balance { get; set; }
+
+        public BankAccount()
+        {
+            ;
+        }
 
         public BankAccount(Guid id)
         {
