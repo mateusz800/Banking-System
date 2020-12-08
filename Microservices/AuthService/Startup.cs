@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AuthService.Controllers;
+using AuthService.Common.Filters;
 using AuthService.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace AuthService
 {
@@ -35,6 +28,7 @@ namespace AuthService
 
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(provider => provider.GetService<UserManager<Entities.Account>>());
+            services.AddScoped<NameFilter>();
 
             services.AddIdentity<Entities.Account, IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
@@ -42,7 +36,6 @@ namespace AuthService
 
             services.AddTransient<UserManager<Entities.Account>>();
             services.AddTransient<DataContext>();
-
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
@@ -56,7 +49,10 @@ namespace AuthService
             {
                 app.UseDeveloperExceptionPage();
             }
-   
+
+            app.UseHttpsRedirection();
+
+            app.UseSwagger();
 
             app.UseHttpsRedirection();
 
