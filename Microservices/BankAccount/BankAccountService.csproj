@@ -11,6 +11,7 @@
     <ItemGroup>
         <PackageReference Include="Aspose.Cells" Version="20.11.0" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
@@ -27,11 +28,9 @@
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Data\" />
 		<Folder Include="Common\" />
 		<Folder Include="Common\Exceptions\" />
 		<Folder Include="Common\Models\" />
-		<Folder Include="CommandsAndQueries\" />
       <Folder Include="CommandsAndQueries\CreateBankAccount\" />
       <Folder Include="CommandsAndQueries\GetAccountBalance\" />
     </ItemGroup>

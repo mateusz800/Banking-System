@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using BankAccountService.Data;
+using BankAccountService.Messaging.Options;
+using BankAccountService.Messaging.Send;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -30,12 +32,22 @@ namespace BankAccountService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+
+            services.Configure<RabbitMqConfiguration>(Configuration.GetSection("RabbitMq"));
+
             services.AddControllers();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSwaggerGen();
+
+            services.AddSingleton<IMoneyTransferModelSender, MoneyTransferModelSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

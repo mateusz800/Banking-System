@@ -41,7 +41,7 @@ namespace BankAccountService.CommandsAndQueries.CreateBankAccount
             dataContext.BankAccounts.Add(newAccount);
             dataContext.SaveChanges();
 
-            return new CreateBankAccountResponse(HttpStatusCode.OK);
+            return new CreateBankAccountResponse(HttpStatusCode.OK, newAccount.Id);
         }
     }
 }

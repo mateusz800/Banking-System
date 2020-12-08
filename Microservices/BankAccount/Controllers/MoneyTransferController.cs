@@ -29,7 +29,7 @@ namespace BankAccountService.Controllers
         {
             try
             {
-                var response = await _mediator.Send(new CreateMoneyTransferCommand(AccountId, transfer));
+                var response = await _mediator.Send(new SendMoneyTransferCommand(AccountId, transfer));
                 return Ok(response);
             }
             catch (BankAccountNotFoundException e)
